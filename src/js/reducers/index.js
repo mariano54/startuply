@@ -1,8 +1,8 @@
 import { combineReducers } from 'redux';
-import friendList from './friendList';
+import formData from './formData';
 
 const rootReducer = combineReducers({
-  friendList
+  formData,
 });
 
 export default rootReducer;

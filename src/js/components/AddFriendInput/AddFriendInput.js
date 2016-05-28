@@ -6,14 +6,14 @@ export default class AddFriendInput extends Component {
 
   static propTypes = {
     addFriend: PropTypes.func.isRequired,
-    name: PropTypes.string
+    name: PropTypes.string,
   };
 
   constructor(props, context) {
     super(props, context);
 
     this.state = {
-      name: this.props.name || ''
+      name: this.props.name || '',
     };
 
     this.handleChange = this.handleChange.bind(this);

@@ -8,7 +8,8 @@ import SliderMonitor from 'redux-slider-monitor';
 
 // createDevTools takes a monitor and produces a DevTools component
 export default createDevTools(
-  <DockMonitor toggleVisibilityKey="ctrl-h"
+  <DockMonitor
+               toggleVisibilityKey="ctrl-h"
                changePositionKey="ctrl-q"
                changeMonitorKey="ctrl-m"
                defaultPosition="right">

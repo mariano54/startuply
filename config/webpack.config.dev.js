@@ -6,10 +6,11 @@ const autoprefixer = require('autoprefixer');
 const PATHS = {
   app: path.resolve(__dirname, '../src/js'),
   styles: path.resolve(__dirname, '../src/styles'),
-  build: path.resolve(__dirname, '../build')
+  build: path.resolve(__dirname, '../build'),
 };
 
 const plugins = [
+
   // Shared code
   new webpack.optimize.CommonsChunkPlugin('vendor', 'js/vendor.bundle.js'),
   // Avoid publishing files when compilation fails
