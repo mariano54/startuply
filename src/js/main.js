@@ -5,8 +5,9 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import configureStore  from './store/configureStore';
-import { Router, browserHistory } from 'react-router';
+import { ReduxRouter } from 'redux-router';
 
+import Header from './components/Header/Header';
 import routes from './routes';
 
 const store = configureStore();
@@ -16,7 +17,8 @@ let ComponentEl;
 
 ComponentEl = (
   <div>
-    <Router history={browserHistory} routes={routes} />
+    <Header />
+    <ReduxRouter routes={routes} />
   </div>
 );
 

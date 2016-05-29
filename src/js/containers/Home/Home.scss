@@ -7,15 +7,19 @@ body {
 
 .Home   {
   width: 500px;
-  padding-top: 18px;
+  padding: 18px 10px 10px 10px;
   border: 1px solid #E3E3E3;
 }
 
 .Home h1 {
-  font-size: 26px;
-  line-height: 20px;
-  margin-bottom: 10px;
+  font-size: 34px;
+  line-height: 24px;
+  margin-bottom: 20px;
   margin-top: 0;
   padding-left: 10px;
   font-family: Helvetica;
+}
+
+.Home h4 h2{
+  font-size: 24px;
 }

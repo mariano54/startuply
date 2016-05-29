@@ -34,7 +34,6 @@ export default function (state = initialState, action) {
     }
 
     case types.SUBMIT_FORM:
-      console.log('submitting reducer');
       return assign({}, state, {
         submitted: true,
       });

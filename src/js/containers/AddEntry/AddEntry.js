@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import EntryForm from '../../components/EntryForm/EntryForm.js';
 
-import * as AddEntryActions from '../../actions/AddEntryActions';
+import * as actions from '../../actions/actions';
 
 class AddEntry extends Component {
   static propTypes = {
@@ -19,7 +19,10 @@ class AddEntry extends Component {
   }
 
   submit () {
-    this.props.actions.submitForm();
+    this.props.actions.addEntry()
+    .then(() => {
+      this.props.actions.changeRoute('/');
+    });
   }
 
   change (name, value) {
@@ -29,7 +32,7 @@ class AddEntry extends Component {
   render () {
     return (
       <div className="Box">
-        <h1>Add New Entry</h1>
+        <h2>Add New Entry</h2>
         <div>
           <EntryForm change={this.change} submit={this.submit} formData={this.props.formData} />
         </div>
@@ -46,7 +49,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    actions: bindActionCreators(AddEntryActions, dispatch),
+    actions: bindActionCreators(actions, dispatch),
   };
 }
 

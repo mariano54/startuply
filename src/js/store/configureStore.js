@@ -1,15 +1,18 @@
 import { createStore, applyMiddleware, compose } from 'redux';
 import rootReducer from '../reducers';
 import { persistState } from 'redux-devtools';
+import thunk from 'redux-thunk';
+import { reduxReactRouter } from 'redux-router';
+import { createHistory } from 'history';
 
 export default function configureStore(initialState) {
 
-  let middleware = applyMiddleware();
+  let middleware = applyMiddleware(thunk);
   let enhancer;
 
   if (process.env.NODE_ENV !== 'production') {
 
-    let middlewares = [require('redux-immutable-state-invariant')()];
+    let middlewares = [require('redux-immutable-state-invariant')(), thunk];
     middleware = applyMiddleware(...middlewares);
 
     let getDebugSessionKey = function () {
@@ -22,6 +25,9 @@ export default function configureStore(initialState) {
 
       // Middleware we want to use in development
       middleware,
+      reduxReactRouter({
+        createHistory,
+      }),
       window.devToolsExtension ?
         window.devToolsExtension() :
         require('../containers/DevTools').default.instrument(),
@@ -30,7 +36,7 @@ export default function configureStore(initialState) {
       persistState(getDebugSessionKey())
     );
   } else {
-    enhancer = compose(middleware);
+    enhancer = compose(middleware, reduxReactRouter({createHistory}));
   }
 
   const store = createStore(rootReducer, initialState, enhancer);

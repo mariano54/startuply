@@ -4,15 +4,14 @@ import { FormGroup, ControlLabel, FormControl,
 import React, { Component, PropTypes } from 'react';
 
 export default class EntryForm extends Component {
- constructor(props) {
-    super(props);
-    this.change = this.change.bind(this);
-  }
-
   static propTypes = {
     change: PropTypes.func.isRequired,
     submit: PropTypes.func.isRequired,
   };
+  constructor(props) {
+    super(props);
+    this.change = this.change.bind(this);
+  }
   change (e) {
     this.props.change(e.target.name, e.target.value);
   }

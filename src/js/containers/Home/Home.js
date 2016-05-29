@@ -1,27 +1,52 @@
 import './Home.scss';
 
 import React, { Component, PropTypes } from 'react';
+import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { Button } from 'react-bootstrap';
 import { Link } from 'react-router';
+import * as actions from '../../actions/actions';
 
 class Home extends Component {
-
   static propTypes = {
+    entries: PropTypes.array.isRequired,
+    actions: PropTypes.object.isRequired,
   };
 
-  render () {
-    // const { friendList: { friendsById }, actions } = this.props;
+  componentDidMount() {
+    this.props.actions.getEntries();
+  }
 
+  render () {
     return (
       <div className="Home">
-        <h1>Startuply</h1>
+        <Link to="/add"><Button bsStyle='primary' className='button'>Add Entry</Button></Link>
         <div>
-          <Link to="/add"><Button bsStyle='primary' className='button'>Add Entry</Button></Link>
+          {this.props.entries.map((entry) =>
+            <div key={entry._id}>
+              <Link to={`/entry?id=${entry._id}`}><h4>{entry.name}</h4></Link>
+              <p>{entry.description}</p>
+            </div>
+          )}
         </div>
       </div>
     );
   }
 }
 
-export default connect()(Home);
+function mapStateToProps(state) {
+  return {
+    entries: state.entries,
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    actions: bindActionCreators(actions, dispatch),
+  };
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Home);
