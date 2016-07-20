@@ -1,13 +1,15 @@
 import * as types from '../constants/ActionTypes';
 import axios from 'axios';
 import { push } from 'redux-router';
+const url = API_URL;
 
 export function changeRoute(newRoute) {
   return push(newRoute);
 }
+
 export function changeForm(name, value) {
   return {
-    type: types.CHANGE_FORM,
+  type: types.CHANGE_FORM,
     name,
     value,
   };
@@ -18,6 +20,7 @@ export function submitForm() {
     type: types.SUBMIT_FORM,
   };
 }
+
 export function saveEntries(entries) {
   return {
     type: types.SAVE_ENTRIES,
@@ -29,7 +32,7 @@ export function addEntry() {
   return (dispatch, getState) => {
     const { formData } = getState();
     dispatch(submitForm());
-    return axios.post('http://127.0.0.1:5000/entries', formData)
+    return axios.post( `${url}/entries`, formData)
     .then(function (response) {
       return response;
     })
@@ -38,11 +41,12 @@ export function addEntry() {
     });
   };
 }
+
 export function deleteEntry(id) {
-  return (dispatch) =>
+  return () =>
     axios({
       method: 'delete',
-      url: 'http://127.0.0.1:5000/entries',
+      url: `${url}/entries`,
       data: {
         id,
       },
@@ -56,13 +60,12 @@ export function deleteEntry(id) {
 }
 
 export function getEntries() {
-  return (dispatch) => {
-    return axios.get('http://127.0.0.1:5000/entries')
+  return (dispatch) =>
+    axios.get(`${url}/entries`)
     .then(function (response) {
       return dispatch(saveEntries(response.data.entries));
     })
     .catch(function (response) {
       console.log(response);
     });
-  };
 }

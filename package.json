@@ -25,6 +25,7 @@
     "build:html": "node ./bin/buildHtml.js",
     "prestart": "rm -rf build",
     "start": "webpack-dev-server --config ./config/webpack.config.dev.js --hot --inline --progress",
+    "start:server": "sudo docker-compose -f server/docker-compose-local.yml up",
     "prebuild": "npm run clean:build && npm run build:html",
     "build": "SET NODE_ENV=production& NODE_ENV=production& webpack -p --config ./config/webpack.config.prod.js --progress",
     "lint": "eslint config src/js/** --ext .js",

@@ -20,7 +20,7 @@ class Home extends Component {
   render () {
     return (
       <div className="Home">
-        <Link to="/add"><Button bsStyle='primary' className='button'>Add Entry</Button></Link>
+        <Link to="/add" ><Button bsStyle='primary' className='button add'>Add Entry</Button></Link>
         <div>
           {this.props.entries.map((entry) =>
             <div key={entry._id}>

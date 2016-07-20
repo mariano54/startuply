@@ -25,6 +25,7 @@ const plugins = [
   // Avoid publishing files when compilation fails
   new webpack.NoErrorsPlugin(),
   new webpack.DefinePlugin({
+    API_URL: JSON.stringify('http://54.186.52.162:5000'),
     'process.env.NODE_ENV': JSON.stringify('production'),
     __DEV__: JSON.stringify(JSON.parse(process.env.DEBUG || 'false'))
   }),
@@ -67,7 +68,7 @@ module.exports = {
     loaders: [
       {
         test: /\.jsx?$/,
-        loaders: ['react-hot', 'babel'],
+        loaders: ['babel'],
         include: PATHS.app
       },
       {

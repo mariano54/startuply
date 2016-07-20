@@ -6,7 +6,6 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import configureStore  from './store/configureStore';
 import { ReduxRouter } from 'redux-router';
-
 import Header from './components/Header/Header';
 import routes from './routes';
 

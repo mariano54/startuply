@@ -1,25 +1,30 @@
 import os
-from flask import Flask, redirect, url_for, request, render_template, jsonify
+from flask import Flask, redirect, url_for, request, send_from_directory, jsonify
 from pymongo import MongoClient
 from flask.ext.cors import CORS
 from bson.objectid import ObjectId
 
 app = Flask(__name__)
 CORS(app)
-
-client = MongoClient(
-    os.environ['DB_PORT_27017_TCP_ADDR'],
-    27017)
+client = MongoClient('db', 27017)
 db = client.tododb
 
 
+@app.route('/js/<path:path>')
+def send_js(path):
+    return send_from_directory('static/js', path)
+
+@app.route('/css/<path:path>')
+def send_css(path):
+    return send_from_directory('static/css', path)
+
+@app.route('/images/<path:path>')
+def send_images(path):
+    return send_from_directory('static/images', path)
+
 @app.route('/')
-def entries():
-
-    _items = db.tododb.find()
-    items = [item for item in _items]
-
-    return render_template('todo.html', items=items)
+def root():
+    return send_from_directory('static', 'index.html')
 
 
 @app.route('/entries', methods=['GET'])

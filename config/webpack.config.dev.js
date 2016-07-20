@@ -16,6 +16,7 @@ const plugins = [
   // Avoid publishing files when compilation fails
   new webpack.NoErrorsPlugin(),
   new webpack.DefinePlugin({
+    API_URL: JSON.stringify('http://127.0.0.1:5000'),
     'process.env.NODE_ENV': JSON.stringify('development'),
     __DEV__: JSON.stringify(JSON.parse(process.env.DEBUG || 'false'))
   }),
@@ -38,11 +39,11 @@ module.exports = {
   output: {
     path: PATHS.build,
     filename: 'js/[name].js',
-    publicPath: '/'
+    publicPath: '/',
   },
   stats: {
     colors: true,
-    reasons: true
+    reasons: true,
   },
   resolve: {
     // We can now require('file') instead of require('file.jsx')

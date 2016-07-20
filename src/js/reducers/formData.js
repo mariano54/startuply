@@ -15,7 +15,7 @@ import { assign } from 'lodash';
 
 const initialState = {
   name: '',
-  industry: '',
+  industry: 'ai',
   description: '',
   size: '',
   funding: '',
