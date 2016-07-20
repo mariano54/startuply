@@ -22,8 +22,20 @@ body {
 
 .Home h4 h2{
   font-size: 24px;
+  display: inline;
 }
 
+h4 {
+  display: inline !important;
+}
 .add {
   margin-bottom: 15px;
+}
+
+.industry {
+  padding-left: 10px;
+  display: inline;
+  font-size: 12px;
+  margin-top: 0px;
+  color: green;
 }

@@ -25,6 +25,7 @@ class Home extends Component {
           {this.props.entries.map((entry) =>
             <div key={entry._id}>
               <Link to={`/entry?id=${entry._id}`}><h4>{entry.name}</h4></Link>
+              <p className="industry">{entry.industry}</p>
               <p>{entry.description}</p>
             </div>
           )}
