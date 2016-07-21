@@ -1,10 +1,12 @@
 import os
 from flask import Flask, redirect, url_for, request, send_from_directory, jsonify
 from pymongo import MongoClient
-from flask.ext.cors import CORS
+from flask_cors import CORS
+from flask_compress import Compress
 from bson.objectid import ObjectId
 
 app = Flask(__name__)
+Compress(app)
 CORS(app)
 client = MongoClient('db', 27017)
 db = client.tododb

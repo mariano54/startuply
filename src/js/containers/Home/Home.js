@@ -19,7 +19,7 @@ class Home extends Component {
 
   render () {
     return (
-      <div className="Home">
+      <span className="Home">
         <Link to="/add" ><Button bsStyle='primary' className='button add'>Add Entry</Button></Link>
         <div>
           {this.props.entries.map((entry) =>
@@ -30,7 +30,7 @@ class Home extends Component {
             </div>
           )}
         </div>
-      </div>
+      </span>
     );
   }
 }

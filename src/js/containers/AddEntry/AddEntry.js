@@ -31,7 +31,7 @@ class AddEntry extends Component {
 
   render () {
     return (
-      <div className="Box">
+      <div className="AddEntry">
         <h2>Add New Entry</h2>
         <div>
           <EntryForm change={this.change} submit={this.submit} formData={this.props.formData} />

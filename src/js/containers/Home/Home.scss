@@ -1,32 +1,26 @@
 body {
   background-color: #F4F3F0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.Home   {
-  width: 500px;
-  padding: 18px 10px 10px 10px;
-  border: 1px solid #E3E3E3;
 }
 
 .Home h1 {
-  font-size: 34px;
   line-height: 24px;
   margin-bottom: 20px;
   margin-top: 0;
   padding-left: 10px;
   font-family: Helvetica;
-}
 
-.Home h4 h2{
-  font-size: 24px;
-  display: inline;
+}
+p {
+  @media only screen and (max-width : 500px) {
+    font-size: 150%;
+  }
 }
 
 h4 {
   display: inline !important;
+  @media only screen and (max-width : 500px) {
+    font-size: 200%;
+  }
 }
 .add {
   margin-bottom: 15px;
@@ -35,7 +29,10 @@ h4 {
 .industry {
   padding-left: 10px;
   display: inline;
-  font-size: 12px;
+  font-size: 80%;
   margin-top: 0px;
   color: green;
+  @media only screen and (max-width : 500px) {
+    font-size: 100%;
+  }
 }

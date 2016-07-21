@@ -1,20 +1,10 @@
-body {
-  background-color: #F4F3F0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
+.Entry{
+  width: 100%;
+  .delete {
+    color: #c0392b;
+  }
 
-.Box {
-  width: 500px;
-  padding: 18px;
-  border: 1px solid #E3E3E3;
-}
-
-.delete {
-  color: #c0392b;
-}
-
-h2 {
-  font-size: 24px;
+  h2 {
+    font-size: 24px;
+  }
 }

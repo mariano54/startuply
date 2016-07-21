@@ -24,8 +24,8 @@ class Entry extends Component {
 
   render () {
     return (
-      <div className="Box">
-        <h2>{this.props.entry.name}</h2>
+      <div className="Entry">
+        <h1>{this.props.entry.name}</h1>
 
         <a className="delete" onClick={() => this.delete(this.props.entry._id)}> Delete</a>
         <p>{this.props.entry.description}</p>
