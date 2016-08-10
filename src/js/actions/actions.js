@@ -58,10 +58,16 @@ export function deleteEntry(id) {
       console.log(response);
     });
 }
+export function setPage(page) {
+  return {
+    type: types.SET_PAGE,
+    page,
+  };
+}
 
-export function getEntries() {
+export function getEntries(page) {
   return (dispatch) =>
-    axios.get(`${url}/entries`)
+    axios.get(`${url}/entries?page=${page}`)
     .then(function (response) {
       return dispatch(saveEntries(response.data.entries));
     })

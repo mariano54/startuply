@@ -24,14 +24,12 @@ def send_css(path):
 def send_images(path):
     return send_from_directory('static/images', path)
 
-@app.route('/')
-def root():
-    return send_from_directory('static', 'index.html')
-
-
 @app.route('/entries', methods=['GET'])
 def get_entries():
     entries = [item for item in db.tododb.find()];
+    page = int(request.args.get('page'))
+    page_size = 10
+    entries = sorted(entries, key=lambda x: x["name"])[page*page_size:(page+1)*page_size]
     for entry in entries:
         entry['_id'] = str(entry['_id'])
     return jsonify({'entries': entries})
@@ -44,6 +42,11 @@ def create_entry():
 @app.route('/entries', methods=['DELETE'])
 def delete_entry():
     return str(db.tododb.delete_one({"_id":ObjectId(request.get_json()["id"])}).deleted_count)
+
+@app.route('/', defaults={'path': ''})
+@app.route('/<path:path>')
+def root():
+    return send_from_directory('static', 'index.html')
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0', debug=True)
