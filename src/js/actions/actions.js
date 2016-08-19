@@ -75,3 +75,16 @@ export function getEntries(page) {
       console.log(response);
     });
 }
+
+export function getEntry(id) {
+  return (dispatch) =>
+    axios.get(`${url}/entries/${id}`)
+    .then(function (response) {
+      console.log("DOne returned", response.data.entry);
+      if (response.data.entry !== undefined)
+        dispatch(saveEntries(new Array(response.data.entry)));
+    })
+    .catch(function (response) {
+      console.log(response);
+    });
+}

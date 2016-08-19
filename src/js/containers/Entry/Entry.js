@@ -10,18 +10,24 @@ import * as actions from '../../actions/actions';
 class Entry extends Component {
   static propTypes = {
     entry: PropTypes.object.isRequired,
+    id: PropTypes.string.isRequired,
     actions: PropTypes.object.isRequired,
   };
 
   constructor(props) {
     super(props);
     this.delete = this.delete.bind(this);
+    if (props.entry.undefined) {
+      this.props.actions.getEntry(props.id);
+    }
   }
+
   delete(id) {
     this.props.actions.deleteEntry(id)
     .then(() => this.props.actions.changeRoute('/'));
   }
 
+  onComponentDi
   render () {
     return (
       <div className="Entry">
@@ -45,8 +51,10 @@ class Entry extends Component {
 }
 
 function mapStateToProps(state) {
+  const entry = find(state.entries, {_id:state.router.location.query.id});
   return {
-    entry: find(state.entries, {_id:state.router.location.query.id}),
+    id: state.router.location.query.id,
+    entry: entry ? entry : {undefined:true},
   };
 }
 

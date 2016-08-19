@@ -12,6 +12,13 @@ client = MongoClient('db', 27017)
 db = client.tododb
 
 
+def clean_entries():
+    entries = [item for item in db.tododb.find()];
+    for entry in entries:
+        if "name" not in entry or entry["name"] == '':
+            db.tododb.delete_one({"_id":ObjectId(entry["_id"])}).deleted_count
+
+
 @app.route('/js/<path:path>')
 def send_js(path):
     return send_from_directory('static/js', path)
@@ -24,6 +31,7 @@ def send_css(path):
 def send_images(path):
     return send_from_directory('static/images', path)
 
+# Get entries
 @app.route('/entries', methods=['GET'])
 def get_entries():
     entries = [item for item in db.tododb.find()];
@@ -34,6 +42,16 @@ def get_entries():
         entry['_id'] = str(entry['_id'])
     return jsonify({'entries': entries})
 
+# Get entry
+@app.route('/entries/<id>', methods=['GET'])
+def get_entry(id=''):
+    entries = [item for item in db.tododb.find({"_id":ObjectId(id)})];
+    if entries is None or len(entries) == 0: return jsonify({'entry':None})
+    entry = entries[0]
+    entry['_id'] = str(entry['_id'])
+    return jsonify({'entry': entry})
+
+
 @app.route('/entries', methods=['POST'])
 def create_entry():
     db.tododb.insert_one(request.get_json())
@@ -43,10 +61,12 @@ def create_entry():
 def delete_entry():
     return str(db.tododb.delete_one({"_id":ObjectId(request.get_json()["id"])}).deleted_count)
 
+
 @app.route('/', defaults={'path': ''})
 @app.route('/<path:path>')
-def root():
+def catch_all(path):
     return send_from_directory('static', 'index.html')
 
 if __name__ == "__main__":
+    clean_entries()
     app.run(host='0.0.0.0', debug=True)
